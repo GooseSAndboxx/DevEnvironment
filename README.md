@@ -1,6 +1,3 @@
-Sure, here's a guide in markdown format on how to clone your repository, set up your Docker container, and host it with ngrok:
-
-```markdown
 # Guide to Clone Repository, Set Up Docker Container, and Host with Ngrok
 
 ## Prerequisites
