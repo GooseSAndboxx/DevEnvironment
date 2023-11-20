@@ -1,43 +1,76 @@
-# Guide to Clone Repository, Set Up Docker Container, and Host with Ngrok
+# DevEnvironment Setup Guide with ngrok Integration
 
 ## Prerequisites
-- Git
-- Docker
-- Ngrok
 
-## Step 1: Clone the Repository
-Open a terminal and navigate to the directory where you want to clone your repository. Then run the following command:
-```bash
-git clone https://github.com/GooseSAndboxx/MyNewRepository
-```
+- [Git](https://git-scm.com/downloads)
+- [Docker](https://www.docker.com/get-started)
+- [ngrok](https://ngrok.com/download) (for secure tunneling to localhost)
 
-## Step 2: Build the Docker Image
-Navigate to the directory containing your Dockerfile (this should be the `MyNewRepository` directory if you followed the previous step). Then run the following command to build your Docker image:
-```bash
-docker build -t my-app .
-```
-Replace `my-app` with the name you want to give your Docker image.
+## Installation
 
-## Step 3: Run the Docker Container
-Start your Docker container with the following command:
-```bash
-docker run -p 5000:5000 my-app
-```
-This will start your application and make it accessible at `localhost:5000`.
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/GooseSAndboxx/DevEnvironment.git
+   cd DevEnvironment
+   ```
 
-## Step 4: Install and Start Ngrok
-In a new terminal window, navigate to the directory where you installed ngrok and run the following command:
-```bash
-./ngrok http 5000
-```
-This will start ngrok, which will create a secure tunnel to your localhost at port 5000.
+2. **Build the Docker Image:**
+   ```bash
+   docker build -t dev-environment .
+   ```
 
-## Step 5: Access Your Application
-You should see a line in the ngrok output that looks something like this:
-```bash
-Forwarding                    http://<random-subdomain>.ngrok.io -> localhost:5000
-```
-You can access your application from anywhere using the `http://<random-subdomain>.ngrok.io` URL. Replace `<random-subdomain>` with the actual subdomain provided by ngrok.
-```
+3. **Run the Docker Container:**
+   ```bash
+   docker run -d -p 5000:5000 dev-environment
+   ```
 
-I hope this helps! Let me know if you have any other questions.
+## Setting up ngrok
+
+1. **Install ngrok:**
+   Follow the instructions on the ngrok website to install it on your system.
+
+2. **Start ngrok:**
+   To create a secure tunnel to your localhost, run:
+   ```bash
+   ngrok http 5000
+   ```
+   This will expose your local server (running inside the Docker container) to the internet.
+
+3. **Copy the ngrok URL:**
+   ngrok will provide an HTTPS URL (e.g., `https://1234abcd.ngrok.io`). Copy this URL.
+
+4. **Update the Action Configuration:**
+   In your custom GPT's edit form, edit the action listed in the GPT
+   Replace the existing URL with the ngrok URL. For example, change:
+   ```json
+   "servers": [
+       {
+           "url": "https://7c6d-105-242-65-118.ngrok-free.app"
+       }
+   ]
+   ```
+   to:
+   ```json
+   "servers": [
+       {
+           "url": "https://1234abcd.ngrok.io"  // Your ngrok URL
+       }
+   ]
+   ```
+
+## Usage
+
+- Access the application via the ngrok URL in your browser or API client.
+- The development environment is now accessible over the internet via the ngrok URL.
+
+## Troubleshooting
+
+- Ensure Docker and ngrok are running without errors.
+- Check if the ngrok URL is correctly updated in the action configuration.
+- Verify that the port numbers match between Docker, ngrok, and your application settings.
+
+For further assistance, refer to the [ngrok documentation](https://ngrok.com/docs) or raise an issue in the repository.
+
+---
+
+This guide now includes the necessary steps to set up ngrok and integrate it with your development environment, making it accessible over the internet. The steps are simplified for beginners, with clear instructions and commands.
