@@ -21,14 +21,14 @@
 
 3. **Run the Docker Container:**
    ```bash
-   docker run -p 5000:5000 -p 6000:6000 -p 7000:7000 -p 8080:8080 -p 9000:9000 flask-webhook
+   docker run -p 5000:5000 -p 6000:6000 -p 7000:7000 -p 8080:8080 -p 9000:9000 dev-environment
    ```
 
 ## Setting up ngrok
 
 1. **Install ngrok:**
    Follow the instructions on the ngrok website to install it on your system.
-
+   [ngrok](https://ngrok.com/download) (for secure tunneling to localhost)
 2. **Start ngrok:**
    To create a secure tunnel to your localhost, run:
    ```bash
@@ -40,8 +40,8 @@
    ngrok will provide an HTTPS URL (e.g., `https://1234abcd.ngrok.io`). Copy this URL.
 
 4. **Update the Action Configuration:**
-   In your custom GPT's edit form, edit the action listed in the GPT
-   Replace the existing URL with the ngrok URL. For example, change:
+   In "Full stack developer" GPT's edit form(Explore -> edit), edit the action listed in the GPT
+   Replace the existing URL with the Https URL provided by Nrgok. For example, change:
    ```json
    "servers": [
        {
@@ -70,7 +70,3 @@
 - Verify that the port numbers match between Docker, ngrok, and your application settings.
 
 For further assistance, refer to the [ngrok documentation](https://ngrok.com/docs) or raise an issue in the repository.
-
----
-
-This guide now includes the necessary steps to set up ngrok and integrate it with your development environment, making it accessible over the internet. The steps are simplified for beginners, with clear instructions and commands.
